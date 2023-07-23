@@ -160,6 +160,8 @@ function hasUserRated(movieID) {
     return movieRatings.some(rating => rating.movieID === movieID);
 }
 
+
+
 function rateMovie(movieID, stars) {
     if (!hasUserRated(movieID)) {
         const movieRating = {

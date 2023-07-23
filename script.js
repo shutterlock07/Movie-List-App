@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', loadInitialMovies);
 
 // Function that will fetch movies from OMDB Api with arguments as query and page
 function fetchMovies(query, page) {
-    const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${query}&page=${page}`;
+    const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${query}&page=${page}`;
 
     fetch(url)
         .then(response => response.json())
@@ -72,7 +72,7 @@ function searchMovies() {
 
 // Function to display movie details of a selected movie by the user
 function displayMovieDetails(movieID) {
-    const url = `http://www.omdbapi.com/?apikey=${apiKey}&i=${movieID}`;
+    const url = `https://www.omdbapi.com/?apikey=${apiKey}&i=${movieID}`;
 
     fetch(url)
         .then(response => response.json())

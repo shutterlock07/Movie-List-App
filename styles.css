@@ -1,0 +1,159 @@
+/* styles.css */
+body,
+html {
+    /* background-image: url(https://images.unsplash.com/photo-1559173525-d16dfd7c17fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dGV4dHVyZXxlbnwwfDB8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60);
+    background-size: cover; */
+
+    font-family: Arial, sans-serif;
+    background-color: rgb(35, 35, 35);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+p {
+    margin: 0;
+}
+
+h2 {
+    font-size: 1em;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+
+.container {
+    max-width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.navbar {
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: grey;
+    padding: 10px;
+    padding-top: 20px;
+
+}
+
+.search-box {
+    padding: 10px;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 10px;
+    gap: 10px;
+    align-items: center;
+}
+
+.pagination {
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    margin: 25px;
+    gap: 5px;
+    align-items: center;
+}
+
+.movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.movie-details {
+    display: flex;
+    margin: 20px;
+    padding: 15px;
+}
+
+.movie-detail-heading {
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-detail-detail {
+    display: flex;
+    flex-direction: column;
+    margin: 55px;
+    gap: 10px;
+}
+
+.movie-item {
+    margin-bottom: 25px;
+    width: 17%;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.movie-poster {
+    border: 5px solid #fff;
+    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 5px;
+    /* aspect-ratio: auto 210 / 315; */
+}
+
+.movie-title {
+    font-size: 0.85em;
+    font-weight: 700;
+}
+
+.movie-year {
+    font-size: 0.85em;
+    color: #919191;
+}
+
+
+/* .star-rating {
+}
+
+.comments {
+} */
+
+@media only screen and (max-width: 767px) {
+
+    .movie-details {
+        flex-wrap: wrap;
+        align-items: left;
+    }
+
+    .movie-detail-detail {
+        margin: 20px 0;
+    }
+
+}
+
+@media only screen and (max-width: 530px) {
+    .movie-item {
+        width: 40%;
+    }
+}

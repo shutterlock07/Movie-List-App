@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Movie Application</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="navbar">
+            <h1 class="heading">Movie List Application</h1>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search for movies..." value="search">
+            <button onclick="searchMovies()">Search</button>
+        </div>
+        <div class="movie-details" id="movieDetails"></div>
+
+
+        <!-- <div class="rating-comments">
+            <h3>Rate this movie:</h3>
+            <div class="star-rating">
+                <span onclick="rateMovie(1)">★</span>
+                <span onclick="rateMovie(2)">★</span>
+                <span onclick="rateMovie(3)">★</span>
+                <span onclick="rateMovie(4)">★</span>
+                <span onclick="rateMovie(5)">★</span>
+            </div>
+            <h3>Add a comment:</h3>
+            <textarea id="commentInput" placeholder="Enter your comment..."></textarea>
+            <button onclick="addComment()">Add Comment</button>
+        </div> -->
+        <div class="movie-list" id="movieList"></div>
+
+        <div class="pagination">
+            <button onclick="prevPage()">Previous Page</button>
+            <span id="pagenumber"></span>
+            <button onclick="nextPage()">Next Page</button>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

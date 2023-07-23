@@ -1,4 +1,3 @@
-// script.js
 const apiKey = 'bdfdb574';
 const moviesPerPage = 10;
 let currentPage = 1;
@@ -7,8 +6,7 @@ let currentMovieID = null;
 
 
 function loadInitialMovies() {
-    // You can customize the initial query to fetch popular movies or any specific category you like.
-    const initialQuery = 'marvel'; // Example: fetch popular movies
+    const initialQuery = 'marvel';
     fetchMovies(initialQuery, 1); // Fetch the first page of initial movies
 }
 

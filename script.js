@@ -5,6 +5,7 @@ let totalResults = 0;
 let currentMovieID = null;
 
 
+
 function loadInitialMovies() {
     const initialQuery = 'marvel';
     fetchMovies(initialQuery, 1); // Fetch the first page of initial movies
@@ -23,6 +24,7 @@ function fetchMovies(query, page) {
             if (data.Response === 'True') {
                 console.log(data)
                 totalResults = parseInt(data.totalResults);
+                window.scrollTo(0, 0);
                 displayMovies(data.Search, page);
             } else {
                 console.log('No results found.');
@@ -78,6 +80,7 @@ function displayMovieDetails(movieID) {
         .then(response => response.json())
         .then(data => {
             console.log(data);
+            window.scrollTo(0, 0);
             const movieDetailsElement = document.getElementById('movieDetails');
             movieDetailsElement.innerHTML = `
         <div class="movie-detail-heading">
@@ -111,6 +114,7 @@ function nextPage() {
         currentPage++;
         fetchMovies(query, currentPage);
     }
+    window.scrollTo(0, 0);
 }
 
 // Pagination Function for displaying previous page by fetching the api
@@ -123,6 +127,7 @@ function prevPage() {
         currentPage--;
         fetchMovies(query, currentPage);
     }
+    window.scrollTo(0, 0);
 }
 
 function rateMovie(stars) {

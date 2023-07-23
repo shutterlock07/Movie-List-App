@@ -96,7 +96,27 @@ function displayMovieDetails(movieID) {
         <p><strong>Cast:</strong> ${data.Actors}</p>
         <p><strong>Plot:</strong> ${data.Plot}</p>
         </div>
+            <div class="user-input">
+        <div class="user-rating">
+          <h3>Rate this movie:</h3>
+          <div class="star-rating">
+            <span onclick="rateMovie('${movieID}', 1)">★</span>
+            <span onclick="rateMovie('${movieID}', 2)">★</span>
+            <span onclick="rateMovie('${movieID}', 3)">★</span>
+            <span onclick="rateMovie('${movieID}', 4)">★</span>
+            <span onclick="rateMovie('${movieID}', 5)">★</span>
+          </div>
+        </div>
+        <div class="user-comments">
+          <h3>User Comments:</h3>
+          <input id="commentInput" placeholder="Write your comment...">
+          <button onclick="addComment()">Add Comment</button>
+        </div>
+        </div>
       `;
+            currentMovieID = data.imdbID;
+            displayUserRating(movieID);
+            displayUserComments(movieID);
 
         })
         .catch(err => {
@@ -130,10 +150,102 @@ function prevPage() {
     window.scrollTo(0, 0);
 }
 
-function rateMovie(stars) {
 
+
+// Rating
+
+
+function hasUserRated(movieID) {
+    const movieRatings = JSON.parse(localStorage.getItem('movieRatings')) || [];
+    return movieRatings.some(rating => rating.movieID === movieID);
 }
 
-function addComment(comment) {
+function rateMovie(movieID, stars) {
+    if (!hasUserRated(movieID)) {
+        const movieRating = {
+            stars: stars,
+            movieID: movieID
+        };
+        // Retrieve existing movie ratings from local storage (if any)
+        const movieRatings = JSON.parse(localStorage.getItem('movieRatings')) || [];
+        movieRatings.push(movieRating);
+        // Save the updated movie ratings back to local storage
+        localStorage.setItem('movieRatings', JSON.stringify(movieRatings));
 
+        setUserRating(movieID, stars);
+    } else {
+        console.error('You have already rated this movie.');
+    }
+}
+
+function setUserRating(movieID, stars) {
+    const starRating = document.querySelectorAll('.user-rating span');
+    starRating.forEach((star, index) => {
+        if (index < stars) {
+            star.classList.add('rated');
+        } else {
+            star.classList.remove('rated');
+        }
+    });
+}
+
+// Comments
+
+function hasUserCommented(movieID) {
+    const movieComments = JSON.parse(localStorage.getItem('movieComments')) || [];
+    return movieComments.some(comment => comment.movieID === movieID);
+}
+
+function displayUserComments(movieID) {
+    const userCommentsElement = document.querySelector('.user-comments');
+    const commentInput = userCommentsElement.querySelector('#commentInput');
+    const addCommentBtn = userCommentsElement.querySelector('button');
+
+    if (hasUserCommented(movieID)) {
+        const movieComments = JSON.parse(localStorage.getItem('movieComments')) || [];
+        const commentsForMovie = movieComments.filter(comment => comment.movieID === movieID);
+        let commentsHtml = '<h3>User Comments:</h3>';
+        commentsForMovie.forEach(comment => {
+            commentsHtml += `<p>${comment.comment}</p>`;
+        });
+        userCommentsElement.innerHTML = commentsHtml;
+    } else {
+        userCommentsElement.innerHTML = `
+        <h3>User Comments:</h3>
+        <textarea id="commentInput" placeholder="Write your comment..."></textarea>
+        <button onclick="addComment()">Add Comment</button>
+      `;
+        commentInput.value = '';
+    }
+
+    addCommentBtn.disabled = false;
+}
+
+function addComment() {
+    const userCommentsElement = document.querySelector('.user-comments');
+    const commentInput = userCommentsElement.querySelector('#commentInput');
+    if (currentMovieID) {
+        const comment = commentInput.value.trim();
+        if (comment !== '') {
+            const movieComment = {
+                comment: comment,
+                movieID: currentMovieID
+            };
+            // Retrieve existing movie comments from local storage (if any)
+            const movieComments = JSON.parse(localStorage.getItem('movieComments')) || [];
+            movieComments.push(movieComment);
+            // Save the updated movie comments back to local storage
+            localStorage.setItem('movieComments', JSON.stringify(movieComments));
+
+            // Refresh the comments display
+            displayUserComments(currentMovieID);
+
+            // Clear the comment input after adding the comment
+            commentInput.value = '';
+        } else {
+            console.error('Comment cannot be empty.');
+        }
+    } else {
+        console.error('No movie selected for comment.');
+    }
 }
